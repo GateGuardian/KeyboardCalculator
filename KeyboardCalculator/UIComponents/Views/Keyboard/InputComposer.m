@@ -29,8 +29,6 @@
 
 - (void)addOperand:(NSString *)operand to:(NSMutableString *)expression inRange:(NSRange)cursor completion:(ComposingCompletion)completion {
     
-    //TODO: advanced operand check: multy DotSigns, NaN etc.
-    
     NSUInteger expressionLength = expression.length;
     BOOL isValidCursor = cursor.location <= expressionLength;
     BOOL isValidOperand = operand.length;
@@ -44,7 +42,7 @@
             NSString *expressionOperand = [expression substringWithRange:expressionOperandRange];
             BOOL tryingToAddMultyDots = [operand isEqualToString:DotSign] && [expressionOperand containsString:DotSign];//operand is a DotSign and expressionOperand allready contains DotSign
             BOOL cursorAtExpressionOperandBegining = cursor.location == expressionOperandRange.location;
-            BOOL tryingToAddZeroToHead = cursorAtExpressionOperandBegining && [self isStringAnZeroSign:operand];// - can't add zero to head of Number
+            BOOL tryingToAddZeroToHead = cursorAtExpressionOperandBegining && [self isStringAnZeroSign:operand] && expressionOperand.length;// - can't add zero to head of Number
             BOOL canAddOperand = !tryingToAddMultyDots && !tryingToAddZeroToHead && isValidOperand;
             if (canAddOperand) {
                 // Merge operand with expressionOperand
@@ -155,6 +153,10 @@
     return (string.integerValue || [string isEqualToString:ZeroSign]|| [string isEqualToString:TripleZeroSign] || [string isEqualToString:DotSign]);
 }
 
+- (BOOL)isOperationInString:(NSString *)string {
+    return ([string containsString:PlusSign] || [string containsString:MinusSign] || [string containsString:CustomDivideSign] || [string containsString:CustomMultiplySign]);
+}
+
 
 #pragma mark - Private
 
@@ -162,6 +164,7 @@
     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
     [numberFormatter setMaximumFractionDigits:MaximumFractionDigits];
+    [numberFormatter setGroupingSeparator:@","];
     return numberFormatter;
 }
 

@@ -18,5 +18,5 @@ typedef void(^ComposingCompletion) (BOOL success, NSError *error, NSString *vali
 - (NSString *)formatString:(NSString *)string;
 - (BOOL)isStringAnOperator:(NSString *)string;
 - (BOOL)isStringAnDigitPart:(NSString *)string;
-
+- (BOOL)isOperationInString:(NSString *)string;
 @end

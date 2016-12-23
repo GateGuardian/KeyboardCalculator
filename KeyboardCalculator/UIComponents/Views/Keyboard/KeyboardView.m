@@ -120,21 +120,16 @@
 }
 
 - (IBAction)returnTap:(id)sender {
-    //TODO: redo isCalculating
     if (self.isCalculating) {
         NSString *normalizedExpressionString = [self replaceCustomOperationSigns:self.textField.text];
         NSString *calculationResult = [self calculateExpression:normalizedExpressionString];
-        if (!calculationResult.length) {
-            return;
+        if (calculationResult.length) {
+            self.isCalculating = NO;
+            self.textField.text = [self.composer formatString:calculationResult];
         }
         [self.returnButton setTitle:DoneText forState:UIControlStateNormal];
-        self.textField.text = [self.composer formatString:calculationResult];
-    } else if (self.calculationError) {
-        
-        return;
     } else {
-        //add animation
-        [self.textField endEditing:YES];
+        [self.textField resignFirstResponder];
     }
 }
 
@@ -260,9 +255,11 @@
     NSMutableArray *operators = [NSMutableArray new];
     NSMutableArray *operands  = [self operandsAndOperators:&operators fromString:expression];
     
-    self.isCalculating = NO;
-    if ((operands.count == 1) && !operators.count) {
-        return [operands firstObject];
+    if (![self validateOperands:operands]) {
+        self.calculationError = [NSError errorWithDomain:KeyBoardErrorDomain code:ErrorCode userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Expression validation failure.", nil),
+              NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"Expression contains invalid symbols or symbols combinations", nil),
+              NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Please review expression", nil)}];
+        return @"";
     }
     if (operators.count >= operands.count) {
         self.calculationError = [NSError errorWithDomain:KeyBoardErrorDomain code:ErrorCode userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Calculation failure.", nil),
@@ -275,6 +272,9 @@
             NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"Couldn't find any digits or operations", nil),
             NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Please enter some digits and operations!", nil)}];
         return @"";
+    }
+    if ((operands.count == 1) && !operators.count) {
+        return [operands firstObject];
     }
     //calculating separated operators and operands
     __block NSString *result = operands.firstObject;
@@ -323,12 +323,34 @@
     return operands;
 }
 
+- (BOOL)validateOperands:(NSMutableArray *)operands {
+    __block BOOL validOperands = YES;
+    [operands enumerateObjectsUsingBlock:^(NSString  *_Nonnull operand, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (![self isValidOperand:operand]) {
+            validOperands = NO;
+            *stop = YES;
+        }
+    }];
+    return validOperands;
+}
+
+- (BOOL)isValidOperand:(NSString *)operand {
+    BOOL isValid = NO;
+    NSArray *operandComponents = [operand componentsSeparatedByString:DotSign];
+    if (operandComponents.count <= 2) {
+        isValid = YES;
+    }
+    //TODO: extra validation rules maybe in separate class
+    
+    return isValid;
+}
+
 #pragma mark - Notfications
 
 - (void)textFiledDidChangeText:(NSNotification *)notification {
     NSLog(@"%@", notification);
     
-    [self processDigitInput:notification.userInfo[@"text"]];
+    //TODO:additions to paste input
 }
 
 @end

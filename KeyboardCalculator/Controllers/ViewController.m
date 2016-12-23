@@ -19,17 +19,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    KeyboardView *inputView = [[KeyboardView alloc] init];
+    inputView.colorScheme = [KeyboardColorScheme initiWithColorsForTitles:[UIColor whiteColor] operators:[UIColor grayColor] digits:[UIColor blackColor]];
+    inputView.textField = self.textField;
 }
 
 #pragma mark - UITextFieldDelegate
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    KeyboardView *inputView = [[KeyboardView alloc] init];
-    inputView.colorScheme = [KeyboardColorScheme initiWithColorsForTitles:[UIColor whiteColor] operators:[UIColor grayColor] digits:[UIColor blackColor]];
-    inputView.textField = textField;
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    
 }
 
-
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    
+}
 
 @end
