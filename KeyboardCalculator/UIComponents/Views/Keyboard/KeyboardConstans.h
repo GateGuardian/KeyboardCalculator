@@ -10,6 +10,10 @@
 #define KeyboardConstans_h
 
 
+#pragma mark - Validation
+
+static NSString *const MathExpresionRegEx = @"^([-+/*]?\\d+(\\.\\d+)?)*";
+
 #pragma mark - Number Formating
 
 static NSInteger const MaximumFractionDigits = 10;

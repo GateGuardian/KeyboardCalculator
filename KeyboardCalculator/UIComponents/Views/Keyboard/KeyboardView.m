@@ -252,41 +252,64 @@
 }
 
 - (NSString *)calculateExpression:(NSString *)expression {
-    NSMutableArray *operators = [NSMutableArray new];
-    NSMutableArray *operands  = [self operandsAndOperators:&operators fromString:expression];
-    
-    if (![self validateOperands:operands]) {
-        self.calculationError = [NSError errorWithDomain:KeyBoardErrorDomain code:ErrorCode userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Expression validation failure.", nil),
-              NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"Expression contains invalid symbols or symbols combinations", nil),
-              NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Please review expression", nil)}];
-        return @"";
-    }
-    if (operators.count >= operands.count) {
-        self.calculationError = [NSError errorWithDomain:KeyBoardErrorDomain code:ErrorCode userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Calculation failure.", nil),
-            NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"To many operators", nil),
-            NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Please review expression and add some digits!", nil)}];
-        return @"";
-    }
-    if (!(operands.count && operators.count)) {
-        self.calculationError = [NSError errorWithDomain:KeyBoardErrorDomain code:ErrorCode userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Calculation failure.", nil),
-            NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"Couldn't find any digits or operations", nil),
-            NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Please enter some digits and operations!", nil)}];
-        return @"";
-    }
-    if ((operands.count == 1) && !operators.count) {
-        return [operands firstObject];
-    }
-    //calculating separated operators and operands
-    __block NSString *result = operands.firstObject;
-    [operators enumerateObjectsUsingBlock:^(NSString *operator, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSString *operand = (NSString *)[operands objectAtIndex:idx + 1];
-        result = [result stringByAppendingFormat:@"%@%@", operator, operand];
-        NSExpression *calculableExpression = [NSExpression expressionWithFormat:result];
-        id calculationResult = [calculableExpression expressionValueWithObject:nil context:nil];
+    NSString *result = @"";
+    BOOL isValidExpression = [[NSPredicate predicateWithFormat:@"SELF MATCHES %@", MathExpresionRegEx] evaluateWithObject:expression];
+    if (isValidExpression) {
+        NSPredicate * parsed = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"1.0 * %@ = 0", expression]];
+        NSExpression *left = [(NSComparisonPredicate *)parsed leftExpression];
+        NSNumber *calculationResult = [left expressionValueWithObject:nil context:nil];
         result = [NSString stringWithFormat:@"%@", calculationResult];
-    }];
-    self.calculationError = nil;
+        if (!result.length) {
+            self.calculationError = [NSError errorWithDomain:KeyBoardErrorDomain code:ErrorCode userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Calculation failure.", nil),
+                NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"Couldn't find any digits or operations", nil),
+                NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Please enter some digits and operations!", nil)}];
+        }
+    } else {
+        self.calculationError = [NSError errorWithDomain:KeyBoardErrorDomain code:ErrorCode userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Validation failure.", nil),
+            NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"Input expression is invalid", nil),
+            NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Please review expression!", nil)}];
+    }
     return result;
+    
+    
+#warning Old Evaluation logic - can be applied for more detailed Error throws
+//    NSMutableArray *operators = [NSMutableArray new];
+//    NSMutableArray *operands  = [self operandsAndOperators:&operators fromString:expression];
+//    
+//    if (![self validateOperands:operands]) {
+//        self.calculationError = [NSError errorWithDomain:KeyBoardErrorDomain code:ErrorCode userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Expression validation failure.", nil),
+//              NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"Expression contains invalid symbols or symbols combinations", nil),
+//              NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Please review expression", nil)}];
+//        return @"";
+//    }
+//    if (operators.count >= operands.count) {
+//        self.calculationError = [NSError errorWithDomain:KeyBoardErrorDomain code:ErrorCode userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Calculation failure.", nil),
+//            NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"To many operators", nil),
+//            NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Please review expression and add some digits!", nil)}];
+//        return @"";
+//    }
+//    if (!(operands.count && operators.count)) {
+//        self.calculationError = [NSError errorWithDomain:KeyBoardErrorDomain code:ErrorCode userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Calculation failure.", nil),
+//            NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"Couldn't find any digits or operations", nil),
+//            NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Please enter some digits and operations!", nil)}];
+//        return @"";
+//    }
+//    if ((operands.count == 1) && !operators.count) {
+//        return [operands firstObject];
+//    }
+//    //calculating separated operators and operands
+//    __block NSString *result = operands.firstObject;
+//    
+//    
+//    [operators enumerateObjectsUsingBlock:^(NSString *operator, NSUInteger idx, BOOL * _Nonnull stop) {
+//        NSString *operand = (NSString *)[operands objectAtIndex:idx + 1];
+//        result = [result stringByAppendingFormat:@"%@%@", operator, operand];
+//        NSExpression *calculableExpression = [NSExpression expressionWithFormat:result];
+//        id calculationResult = [calculableExpression expressionValueWithObject:nil context:nil];
+//        result = [NSString stringWithFormat:@"%@", calculationResult];
+//    }];
+//    self.calculationError = nil;
+//    return result;
 }
 - (NSMutableArray *)operandsAndOperators:(NSMutableArray **)operators fromString:(NSString *)string {
     
