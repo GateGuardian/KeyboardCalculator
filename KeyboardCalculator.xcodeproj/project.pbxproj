@@ -9,10 +9,13 @@
 /* Begin PBXBuildFile section */
 		B42012651E0D360600ADE7AE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B42012641E0D360600ADE7AE /* main.m */; };
 		B42012681E0D360600ADE7AE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B42012671E0D360600ADE7AE /* AppDelegate.m */; };
-		B420126B1E0D360600ADE7AE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B420126A1E0D360600ADE7AE /* ViewController.m */; };
-		B420126E1E0D360600ADE7AE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B420126C1E0D360600ADE7AE /* Main.storyboard */; };
 		B42012701E0D360600ADE7AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B420126F1E0D360600ADE7AE /* Assets.xcassets */; };
-		B42012731E0D360600ADE7AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B42012711E0D360600ADE7AE /* LaunchScreen.storyboard */; };
+		B42012891E0D373900ADE7AE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B420127C1E0D373800ADE7AE /* ViewController.m */; };
+		B420128A1E0D373900ADE7AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B420127F1E0D373800ADE7AE /* LaunchScreen.storyboard */; };
+		B420128C1E0D373900ADE7AE /* InputComposer.m in Sources */ = {isa = PBXBuildFile; fileRef = B42012841E0D373900ADE7AE /* InputComposer.m */; };
+		B420128D1E0D373900ADE7AE /* KeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = B42012871E0D373900ADE7AE /* KeyboardView.m */; };
+		B420128E1E0D373900ADE7AE /* KeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B42012881E0D373900ADE7AE /* KeyboardView.xib */; };
+		B42012901E0D394300ADE7AE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B420128F1E0D394300ADE7AE /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,12 +23,18 @@
 		B42012641E0D360600ADE7AE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B42012661E0D360600ADE7AE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B42012671E0D360600ADE7AE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		B42012691E0D360600ADE7AE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		B420126A1E0D360600ADE7AE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		B420126D1E0D360600ADE7AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B420126F1E0D360600ADE7AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B42012721E0D360600ADE7AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B42012741E0D360600ADE7AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B420127B1E0D373800ADE7AE /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		B420127C1E0D373800ADE7AE /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		B420127F1E0D373800ADE7AE /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B42012831E0D373900ADE7AE /* InputComposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputComposer.h; sourceTree = "<group>"; };
+		B42012841E0D373900ADE7AE /* InputComposer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputComposer.m; sourceTree = "<group>"; };
+		B42012851E0D373900ADE7AE /* KeyboardConstans.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardConstans.h; sourceTree = "<group>"; };
+		B42012861E0D373900ADE7AE /* KeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardView.h; sourceTree = "<group>"; };
+		B42012871E0D373900ADE7AE /* KeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardView.m; sourceTree = "<group>"; };
+		B42012881E0D373900ADE7AE /* KeyboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardView.xib; sourceTree = "<group>"; };
+		B420128F1E0D394300ADE7AE /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,13 +67,11 @@
 		B42012621E0D360600ADE7AE /* KeyboardCalculator */ = {
 			isa = PBXGroup;
 			children = (
+				B420127A1E0D373800ADE7AE /* Controllers */,
+				B420127D1E0D373800ADE7AE /* UIComponents */,
 				B42012661E0D360600ADE7AE /* AppDelegate.h */,
 				B42012671E0D360600ADE7AE /* AppDelegate.m */,
-				B42012691E0D360600ADE7AE /* ViewController.h */,
-				B420126A1E0D360600ADE7AE /* ViewController.m */,
-				B420126C1E0D360600ADE7AE /* Main.storyboard */,
 				B420126F1E0D360600ADE7AE /* Assets.xcassets */,
-				B42012711E0D360600ADE7AE /* LaunchScreen.storyboard */,
 				B42012741E0D360600ADE7AE /* Info.plist */,
 				B42012631E0D360600ADE7AE /* Supporting Files */,
 			);
@@ -77,6 +84,54 @@
 				B42012641E0D360600ADE7AE /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B420127A1E0D373800ADE7AE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B420127B1E0D373800ADE7AE /* ViewController.h */,
+				B420127C1E0D373800ADE7AE /* ViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		B420127D1E0D373800ADE7AE /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				B420127E1E0D373800ADE7AE /* StoryBoards */,
+				B42012811E0D373800ADE7AE /* Views */,
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
+		B420127E1E0D373800ADE7AE /* StoryBoards */ = {
+			isa = PBXGroup;
+			children = (
+				B420128F1E0D394300ADE7AE /* Main.storyboard */,
+				B420127F1E0D373800ADE7AE /* LaunchScreen.storyboard */,
+			);
+			path = StoryBoards;
+			sourceTree = "<group>";
+		};
+		B42012811E0D373800ADE7AE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B42012821E0D373900ADE7AE /* Keyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B42012821E0D373900ADE7AE /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				B42012831E0D373900ADE7AE /* InputComposer.h */,
+				B42012841E0D373900ADE7AE /* InputComposer.m */,
+				B42012851E0D373900ADE7AE /* KeyboardConstans.h */,
+				B42012861E0D373900ADE7AE /* KeyboardView.h */,
+				B42012871E0D373900ADE7AE /* KeyboardView.m */,
+				B42012881E0D373900ADE7AE /* KeyboardView.xib */,
+			);
+			path = Keyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,9 +192,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B42012731E0D360600ADE7AE /* LaunchScreen.storyboard in Resources */,
+				B420128E1E0D373900ADE7AE /* KeyboardView.xib in Resources */,
 				B42012701E0D360600ADE7AE /* Assets.xcassets in Resources */,
-				B420126E1E0D360600ADE7AE /* Main.storyboard in Resources */,
+				B420128A1E0D373900ADE7AE /* LaunchScreen.storyboard in Resources */,
+				B42012901E0D394300ADE7AE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,32 +206,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B420126B1E0D360600ADE7AE /* ViewController.m in Sources */,
+				B42012891E0D373900ADE7AE /* ViewController.m in Sources */,
 				B42012681E0D360600ADE7AE /* AppDelegate.m in Sources */,
+				B420128D1E0D373900ADE7AE /* KeyboardView.m in Sources */,
+				B420128C1E0D373900ADE7AE /* InputComposer.m in Sources */,
 				B42012651E0D360600ADE7AE /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		B420126C1E0D360600ADE7AE /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B420126D1E0D360600ADE7AE /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		B42012711E0D360600ADE7AE /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B42012721E0D360600ADE7AE /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		B42012751E0D360600ADE7AE /* Debug */ = {
@@ -307,6 +346,7 @@
 				B42012791E0D360600ADE7AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
